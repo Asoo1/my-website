@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دليل سياسات وإجراءات الموارد البشرية — ماز الهندسية</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:       #1c0c40;
+    --deep:      #1c0c40;
+    --mid:       #2d1959;
+    --accent:    #2d1959;
+    --gold:      #dcdde1;
+    --gold-lt:   #fff;
+    --cream:     #faf8f4;
+    --paper:     #ffffff;
+    --border:    #d9d3c7;
+    --muted:     #6b6b6b;
+    --light-bg:  #f5f3ee;
+    --shadow:    rgba(26,26,46,0.10);
+    --page-w:    860px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+    background: #e8e4dc;
+    color: var(--ink);
+    min-height: 100vh;
+    direction: rtl;
+  }
+
+  /* ── TOP BAR ── */
+  #topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: var(--deep);
+    padding: 0 24px;
+    height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  }
+  #topbar .brand {
+    color: var(--gold-lt);
+    font-family: 'Amiri', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  #topbar .actions { display: flex; gap: 10px; align-items: center; }
+  #topbar button {
+    background: none; border: 1px solid rgba(180,160,100,0.4);
+    color: var(--gold-lt); padding: 6px 14px; border-radius: 4px;
+    cursor: pointer; font-size: 0.82rem; font-family: inherit;
+    transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+  }
+  #topbar button:hover { background: rgba(180,160,100,0.15); border-color: var(--gold-lt); }
+  #topbar button.primary {
+    background: var(--gold); border-color: var(--gold); color: #fff; font-weight: 600;
+  }
+  #topbar button.primary:hover { background: var(--gold-lt); }
+
+  /* ── SEARCH BAR ── */
+  #search-bar {
+    position: fixed; top: 56px; left: 0; right: 0; z-index: 999;
+    background: #1e2a45; padding: 10px 24px;
+    display: none; align-items: center; gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  #search-bar.open { display: flex; }
+  #search-input {
+    flex: 1; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    color: #fff; padding: 8px 14px; border-radius: 6px; font-size: 0.95rem;
+    font-family: inherit; outline: none; direction: rtl;
+  }
+  #search-input::placeholder { color: rgba(255,255,255,0.4); }
+  #search-input:focus { border-color: var(--gold); }
+  #search-count { color: var(--gold-lt); font-size: 0.82rem; white-space: nowrap; min-width: 80px; }
+  .search-nav { display: flex; gap: 6px; }
+  .search-nav button {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    color: #fff; width: 30px; height: 30px; border-radius: 4px;
+    cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center;
+  }
+  .search-nav button:hover { background: rgba(180,160,100,0.2); }
+  mark.highlight { background: #ffd700; color: #000; border-radius: 2px; padding: 0 1px; }
+  mark.highlight.active { background: #ff8c00; color: #fff; }
+
+  /* ── LAYOUT ── */
+  .layout { display: flex; margin-top: 56px; min-height: calc(100vh - 56px); }
+
+  /* ── SIDEBAR TOC ── */
+  #toc-sidebar {
+    width: 280px; flex-shrink: 0;
+    background: var(--deep);
+    position: fixed; top: 56px; right: 0; bottom: 0;
+    overflow-y: auto; padding: 24px 0;
+    border-left: 1px solid rgba(255,255,255,0.06);
+    transition: transform 0.3s;
+    z-index: 900;
+  }
+  #toc-sidebar.hidden { transform: translateX(100%); }
+  #toc-sidebar h3 {
+    color: var(--gold); font-family: 'Amiri', serif;
+    font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0 20px 12px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 8px;
+  }
+  #toc-sidebar a {
+    display: block; padding: 9px 20px;
+    color: rgba(255,255,255,0.65); text-decoration: none;
+    font-size: 0.88rem; line-height: 1.4;
+    border-right: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  #toc-sidebar a:hover { color: var(--gold-lt); background: rgba(255,255,255,0.04); }
+  #toc-sidebar a.active { color: var(--gold-lt); border-right-color: var(--gold); background: rgba(180,150,90,0.08); }
+  #toc-sidebar .toc-chapter { font-weight: 600; color: rgba(255,255,255,0.85); padding-top: 14px; }
+  #toc-sidebar .toc-sub { padding-right: 30px; font-size: 0.82rem; }
+
+  /* ── MAIN CONTENT ── */
+  #main-content {
+    margin-right: 280px;
+    flex: 1; padding: 40px 32px;
+    transition: margin-right 0.3s;
+  }
+  #main-content.full { margin-right: 0; }
+
+  /* ── PAGE ── */
+  .page {
+    max-width: var(--page-w);
+    margin: 0 auto 32px;
+    background: var(--paper);
+    box-shadow: 0 2px 20px var(--shadow), 0 0 0 1px rgba(0,0,0,0.06);
+    border-radius: 2px;
+    padding: 60px 64px;
+    position: relative;
+  }
+  .page::before {
+    content: '';
+    position: absolute; top: 0; right: 0; left: 0; height: 4px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--mid) 100%);
+  }
+  .page-cover { text-align: center; padding: 80px 64px; }
+  .page-cover .logo-area { margin-bottom: 48px; }
+  .page-cover .logo-text {
+    font-family: 'Amiri', serif; font-size: 1.5rem;
+    color: var(--mid); letter-spacing: 0.05em;
+  }
+  .page-cover .logo-sub { color: var(--muted); font-size: 0.9rem; letter-spacing: 0.08em; margin-top: 4px; }
+  .page-cover h1 {
+    font-family: 'Amiri', serif; font-size: 2.6rem;
+    color: var(--deep); line-height: 1.5; margin-bottom: 16px;
+  }
+  .page-cover h2 { font-size: 1.2rem; color: var(--mid); font-weight: 400; }
+  .divider-gold {
+    width: 80px; height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin: 24px auto;
+  }
+
+  /* ── META TABLE ── */
+  .meta-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9rem; }
+  .meta-table th, .meta-table td {
+    border: 1px solid var(--border); padding: 10px 14px; text-align: right;
+  }
+  .meta-table th { background: var(--light-bg); color: var(--deep); font-weight: 600; }
+  .meta-table td { color: var(--ink); }
+
+  /* ── SECTION HEADERS ── */
+  .chapter-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 28px; padding-bottom: 16px;
+    border-bottom: 2px solid var(--light-bg);
+  }
+  .chapter-number {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--deep); color: var(--gold-lt);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Amiri', serif; font-size: 1.1rem; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .chapter-title { font-family: 'Amiri', serif; font-size: 1.55rem; color: var(--deep); }
+
+  h2.section-title {
+    font-family: 'Amiri', serif; font-size: 1.25rem;
+    color: var(--mid); margin: 28px 0 14px;
+    padding-right: 12px; border-right: 3px solid var(--gold);
+  }
+  h3.subsection { font-size: 1rem; color: var(--deep); margin: 18px 0 10px; font-weight: 600; }
+
+  p { line-height: 1.9; color: #2a2a2a; margin-bottom: 10px; font-size: 0.95rem; }
+
+  /* ── ACCORDION ── */
+  .accordion { margin-bottom: 8px; }
+  .accordion-btn {
+    width: 100%; background: var(--light-bg); border: 1px solid var(--border);
+    padding: 14px 18px; text-align: right; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: inherit; font-size: 0.95rem; font-weight: 600;
+    color: var(--deep); border-radius: 4px; transition: all 0.2s;
+  }
+  .accordion-btn:hover { background: #ede9e1; border-color: var(--gold); }
+  .accordion-btn.open { background: var(--deep); color: var(--gold-lt); border-color: var(--deep); border-radius: 4px 4px 0 0; }
+  .accordion-icon { font-size: 1rem; transition: transform 0.3s; }
+  .accordion-btn.open .accordion-icon { transform: rotate(180deg); }
+  .accordion-body {
+    display: none; border: 1px solid var(--border); border-top: none;
+    border-radius: 0 0 4px 4px; padding: 20px 22px; background: #fff;
+    animation: slideDown 0.25s ease;
+  }
+  .accordion-body.open { display: block; }
+  @keyframes slideDown { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── POLICY ITEMS ── */
+  .policy-list { list-style: none; padding: 0; }
+  .policy-list li {
+    padding: 9px 0 9px 0; border-bottom: 1px dashed #e0dbd2;
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 0.93rem; line-height: 1.8; color: #2a2a2a;
+  }
+  .policy-list li:last-child { border-bottom: none; }
+  .policy-list li::before {
+    content: '◆'; color: var(--gold); font-size: 0.55rem;
+    margin-top: 7px; flex-shrink: 0;
+  }
+  .policy-list.numbered { list-style: none; counter-reset: pol; }
+  .policy-list.numbered li { counter-increment: pol; }
+  .policy-list.numbered li::before {
+    content: counter(pol) '.';
+    color: var(--mid); font-weight: 700; font-size: 0.85rem;
+    margin-top: 2px; min-width: 20px;
+  }
+
+  /* ── INLINE TAGS ── */
+  .tag {
+    display: inline-block; padding: 2px 8px; border-radius: 3px;
+    font-size: 0.78rem; font-weight: 600; margin: 2px 2px;
+  }
+  .tag-blue { background: #e8f0fe; color: #1a56db; }
+  .tag-green { background: #e3f9eb; color: #1a7a3f; }
+  .tag-amber { background: #fff4e5; color: #c05c00; }
+  .tag-red { background: #ffe5e5; color: #c0392b; }
+
+  /* ── DATA TABLE ── */
+  .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.87rem; }
+  .data-table th {
+    background: var(--deep); color: var(--gold-lt); padding: 10px 12px;
+    text-align: right; font-weight: 600;
+  }
+  .data-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: #2a2a2a; }
+  .data-table tr:nth-child(even) td { background: var(--light-bg); }
+  .data-table tr:hover td { background: #ede9e1; }
+
+  /* ── CALLOUT BOXES ── */
+  .callout {
+    border-radius: 6px; padding: 14px 18px; margin: 16px 0;
+    border-right: 4px solid; font-size: 0.9rem; line-height: 1.8;
+  }
+  .callout-info { background: #eef5ff; border-color: #3b82f6; color: #1e3a5f; }
+  .callout-warn { background: #fffbeb; border-color: #f59e0b; color: #7c4d00; }
+  .callout-danger { background: #fff1f2; border-color: #ef4444; color: #7f1d1d; }
+  .callout-success { background: #f0fdf4; border-color: #22c55e; color: #14532d; }
+  .callout strong { font-weight: 700; }
+
+  /* ── ACKNOWLEDGMENT ── */
+  #ack-box {
+    max-width: var(--page-w); margin: 0 auto 40px;
+    background: var(--paper); box-shadow: 0 2px 20px var(--shadow);
+    border-radius: 2px; padding: 36px 64px; text-align: center;
+    border-top: 4px solid var(--gold);
+  }
+  #ack-box h3 { font-family: 'Amiri', serif; font-size: 1.3rem; color: var(--deep); margin-bottom: 10px; }
+  #ack-box p { font-size: 0.9rem; color: var(--muted); margin-bottom: 20px; }
+  #ack-check { display: flex; align-items: center; gap: 12px; justify-content: center; margin: 16px 0; cursor: pointer; }
+  #ack-check input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--gold); cursor: pointer; }
+  #ack-check label { font-size: 0.93rem; color: var(--ink); cursor: pointer; }
+  #ack-sign {
+    background: var(--deep); color: var(--gold-lt); border: none;
+    padding: 12px 32px; font-family: inherit; font-size: 0.95rem;
+    font-weight: 600; border-radius: 4px; cursor: pointer;
+    opacity: 0.4; pointer-events: none; transition: all 0.3s; margin-top: 8px;
+  }
+  #ack-sign.ready { opacity: 1; pointer-events: all; }
+  #ack-sign.done { background: #166534; }
+  #ack-date { font-size: 0.82rem; color: var(--muted); margin-top: 10px; }
+
+  /* ── CROSS-LINKS ── */
+  a.cross-link {
+    color: var(--gold); text-decoration: underline dashed;
+    text-underline-offset: 3px; cursor: pointer; font-size: 0.88rem;
+  }
+  a.cross-link:hover { color: var(--gold-lt); }
+
+  /* ── PAGE NUMBERS ── */
+  .page-num {
+    position: absolute; bottom: 20px; left: 64px;
+    font-size: 0.75rem; color: var(--border);
+    font-family: 'Amiri', serif;
+  }
+
+  /* ── PRINT STYLES ── */
+  @media print {
+    body { background: #fff; }
+    #topbar, #toc-sidebar, #search-bar, #ack-box { display: none !important; }
+    #main-content { margin-right: 0 !important; padding: 0 !important; }
+    .page { box-shadow: none; margin: 0; padding: 40px 50px; page-break-after: always; }
+    .accordion-body { display: block !important; border: none; padding: 10px 0; }
+    .accordion-btn { background: none; color: #000; border: none; padding: 4px 0; font-size: 1rem; }
+    .accordion-icon { display: none; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    #toc-sidebar { transform: translateX(100%); }
+    #toc-sidebar.mobile-open { transform: translateX(0); }
+    #main-content { margin-right: 0; padding: 16px; }
+    .page { padding: 28px 20px; }
+    .page-cover { padding: 40px 20px; }
+    .page-cover h1 { font-size: 1.8rem; }
+  }
+
+  /* ── SCROLL TO TOP ── */
+  #scroll-top {
+    position: fixed; bottom: 24px; left: 24px;
+    background: var(--deep); color: var(--gold-lt);
+    border: 1px solid var(--gold); border-radius: 50%;
+    width: 44px; height: 44px; cursor: pointer;
+    font-size: 1.1rem; display: none; align-items: center; justify-content: center;
+    box-shadow: 0 2px 8px var(--shadow); transition: all 0.2s; z-index: 500;
+  }
+  #scroll-top.show { display: flex; }
+  #scroll-top:hover { background: var(--gold); color: #fff; }
+
+  /* ── TOC PAGE ── */
+  .toc-page a { color: var(--mid); text-decoration: none; display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px dotted var(--border); font-size: 0.93rem; }
+  .toc-page a:hover { color: var(--gold); }
+  .toc-page .toc-num { color: var(--muted); font-size: 0.82rem; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+
+<div id="topbar">
+  <div class="brand">ماز الهندسية — دليل الموارد البشرية</div>
+  <div class="actions">
+    <button onclick="toggleSearch()">🔍 بحث</button>
+    <button onclick="toggleSidebar()">☰ فهرس</button>
+    <button class="primary" onclick="window.print()">🖨️ طباعة / PDF</button>
+  </div>
+</div>
+
+<!-- SEARCH BAR -->
+<div id="search-bar">
+  <input id="search-input" type="text" placeholder="ابحث في الدليل..." oninput="doSearch(this.value)">
+  <span id="search-count"></span>
+  <div class="search-nav">
+    <button onclick="prevMatch()">▲</button>
+    <button onclick="nextMatch()">▼</button>
+    <button onclick="clearSearch()">✕</button>
+  </div>
+</div>
+
+<!-- SIDEBAR TOC -->
+
+<div id="toc-sidebar">
+  <h3>محتويات الدليل</h3>
+  <a href="#cover" class="toc-chapter">صفحة الغلاف والاعتماد</a>
+  <a href="#toc" class="toc-chapter">الفهرس</a>
+  <a href="#intro" class="toc-chapter">المقدمة والأحكام العامة</a>
+  <a href="#ch1" class="toc-chapter">الفصل الأول: التوظيف والتعيين</a>
+  <a href="#ch1-1" class="toc-sub">١. سياسة التوظيف</a>
+  <a href="#ch1-2" class="toc-sub">٢. شروط التعيين</a>
+  <a href="#ch1-3" class="toc-sub">٣. إجراءات التوظيف</a>
+  <a href="#ch1-4" class="toc-sub">٤. عقود العمل</a>
+  <a href="#ch1-5" class="toc-sub">٥. فترة التجربة</a>
+  <a href="#ch2" class="toc-chapter">الفصل الثاني: الدوام وساعات العمل</a>
+  <a href="#ch2-1" class="toc-sub">١. أيام وساعات العمل</a>
+  <a href="#ch2-2" class="toc-sub">٢. الحضور والانصراف</a>
+  <a href="#ch2-3" class="toc-sub">٣. التأخير والغياب</a>
+  <a href="#ch2-4" class="toc-sub">٤. العمل الإضافي</a>
+  <a href="#ch3" class="toc-chapter">الفصل الثالث: الأجور والمزايا</a>
+  <a href="#ch4" class="toc-chapter">الفصل الرابع: الإجازات وتذاكر السفر</a>
+  <a href="#ch5" class="toc-chapter">الفصل الخامس: تقييم الأداء والتطوير</a>
+  <a href="#ch6" class="toc-chapter">الفصل السادس: المخالفات والجزاءات</a>
+  <a href="#ch7" class="toc-chapter">الفصل السابع: انتهاء الخدمة</a>
+  <a href="#ch8" class="toc-chapter">الفصل الثامن: أحكام ختامية</a>
+  <a href="#ack-box" class="toc-chapter" style="color:var(--gold-lt);margin-top:16px;">✍️ إقرار الاستلام</a>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="layout">
+<div id="main-content">
+
+<!-- COVER PAGE -->
+<div class="page page-cover" id="cover">
+<img 
+    src="https://mazeng.sa/wp-content/uploads/2022/01/cropped-Maz-Engineering_Logo_HiRes-removebg-300x100.png" 
+    alt="وصف الصورة" 
+    style="width: 400px; display: block; margin: 0 auto;"
+  >
+
+  <div class="divider-gold"></div>
+  <h1>دليل سياسات وإجراءات الموارد البشرية</h1>
+  <h2>لمكتب ماز للإستشارات الهندسية</h2>
+  <div class="divider-gold"></div>
+
+  <table class="meta-table" style="margin-top:32px;">
+    <tr><th>الموضوع</th><td>دليل الموارد البشرية</td></tr>
+    <tr><th>تاريخ الإصدار</th><td>05/03/2026</td></tr>
+    <tr><th>رقم الإصدار</th><td>01 — الإصدار الأول</td></tr>
+  </table>
+
+  <table class="meta-table" style="margin-top:20px;">
+    <tr><th style="width:33%">الجهة</th><th style="width:33%">الاسم</th><th>المنصب</th></tr>
+    <tr><td>تعديل ومراجعة</td><td>أسماء الغامدي</td><td>مدير الموارد البشرية</td></tr>
+    <tr><td>الموافقة المبدئية</td><td>مصطفى كامل</td><td>المدير العام</td></tr>
+    <tr><td>الاعتماد النهائي</td><td>صلاح الغامدي</td><td>المدير التنفيذي</td></tr>
+  </table>
+  <div class="page-num">1</div>
+</div>
+
+<!-- TOC PAGE -->
+
+<div class="page" id="toc">
+  <div class="chapter-header">
+    <div class="chapter-title" style="font-size:1.7rem;">الفهرس</div>
+  </div>
+  <div class="toc-page">
+    <a href="#intro"><span>المقدمة والأحكام العامة</span><span class="toc-num">ص ٣</span></a>
+    <a href="#ch1"><span><strong>الفصل الأول:</strong> التوظيف والتعيين</span><span class="toc-num">ص ٤</span></a>
+    <a href="#ch2"><span><strong>الفصل الثاني:</strong> الدوام وساعات العمل</span><span class="toc-num">ص ٧</span></a>
+    <a href="#ch3"><span><strong>الفصل الثالث:</strong> الأجور والمزايا</span><span class="toc-num">ص ١٠</span></a>
+    <a href="#ch4"><span><strong>الفصل الرابع:</strong> الإجازات وتذاكر السفر</span><span class="toc-num">ص ١٣</span></a>
+    <a href="#ch5"><span><strong>الفصل الخامس:</strong> تقييم الأداء والتطوير</span><span class="toc-num">ص ١٨</span></a>
+    <a href="#ch6"><span><strong>الفصل السادس:</strong> المخالفات والجزاءات</span><span class="toc-num">ص ٢٥</span></a>
+    <a href="#ch7"><span><strong>الفصل السابع:</strong> انتهاء الخدمة</span><span class="toc-num">ص ٢٨</span></a>
+    <a href="#ch8"><span><strong>الفصل الثامن:</strong> أحكام ختامية</span><span class="toc-num">ص ٣٢</span></a>
+  </div>
+  <div class="page-num">2</div>
+</div>
+
+<!-- INTRO PAGE -->
+<div class="page" id="intro">
+  <div class="chapter-header">
+    <div class="chapter-title">تمهيد ومقدمة</div>
+  </div>
+
+  <h2 class="section-title">الرؤية</h2>
+  <p>أن نكون الخيار الأول في تقديم الاستشارات الهندسية المبتكرة والمستدامة، والمساهمة في بناء مستقبل هندسي متميز يعكس معايير الجودة العالمية بلمسات محلية.</p>
+
+  <h2 class="section-title">المهمة</h2>
+  <p>تقديم خدمات استشارية هندسية متكاملة تتسم بالدقة والكفاءة، من خلال استقطاب وتطوير أفضل الكفاءات البشرية، وتوظيف أحدث التقنيات لضمان رضا عملائنا وتحقيق تطلعات شركائنا.</p>
+
+  <h2 class="section-title">الأهداف</h2>
+  <ul class="policy-list numbered">
+    <li>استقطاب الكفاءات الهندسية والإدارية المتميزة وتوفير بيئة عمل محفزة.</li>
+    <li>بناء منظومة عمل واضحة تضمن العدالة والشفافية لجميع الموظفين.</li>
+    <li>تطوير مهارات الكادر البشري من خلال برامج تدريبية مستمرة.</li>
+    <li>تعزيز الولاء المؤسسي ورفع مستوى الإنتاجية.</li>
+  </ul>
+
+  <h2 class="section-title" style="margin-top:28px;">أحكام عامة</h2>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      هدف استعمال الدليل <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <p>يهدف هذا الدليل إلى توحيد معايير العمل في إدارة الموارد البشرية، وتقديم إطار عملي للمسؤولين والموظفين لفهم السياسات المتبعة، مما يساهم في تحقيق الانسجام الداخلي والكفاءة التشغيلية.</p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      التقويم المعتمد <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <p>يعتمد <strong>التقويم الهجري</strong> في جميع المواعيد والمدد المنصوص عليها في هذا الدليل، مع مراعاة اعتماد التاريخ الميلادي في صرف الرواتب الشهرية بما يتوافق مع متطلبات نظام حماية الأجور.</p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      تعريف المصطلحات الرئيسية <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <table class="data-table">
+        <tr><th>المصطلح</th><th>التعريف</th></tr>
+        <tr><td>مكتب العمل</td><td>الجهة الحكومية المختصة بتطبيق نظام العمل في المملكة العربية السعودية.</td></tr>
+        <tr><td>الشركة / جهة العمل</td><td>الكيان القانوني الذي يعمل لديه الموظفون والمسؤول عن إدارة وتنظيم العمل.</td></tr>
+        <tr><td>الموظف</td><td>كل شخص طبيعي يعمل لدى الشركة بموجب عقد عمل مقابل أجر متفق عليه.</td></tr>
+        <tr><td>عقد العمل</td><td>اتفاق بين الشركة والموظف يحدد شروط العمل والحقوق والواجبات.</td></tr>
+        <tr><td>فترة التجربة</td><td>فترة زمنية محددة في بداية التوظيف يتم خلالها تقييم أداء الموظف.</td></tr>
+        <tr><td>الراتب الأساسي</td><td>الأجر الأساسي المتفق عليه في عقد العمل قبل إضافة أي بدلات.</td></tr>
+        <tr><td>الراتب الإجمالي</td><td>إجمالي الأجر يشمل الراتب الأساسي مضافاً إليه جميع البدلات والمزايا.</td></tr>
+        <tr><td>تقييم الأداء</td><td>عملية قياس أداء الموظف بشكل دوري لمعرفة مستوى الإنجاز والكفاءة.</td></tr>
+        <tr><td>إنهاء الخدمة</td><td>انتهاء علاقة العمل بين الموظف والشركة لأي سبب نظامي.</td></tr>
+        <tr><td>مكافأة نهاية الخدمة</td><td>المبلغ المالي المستحق للموظف عند انتهاء خدمته وفق نظام العمل.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout callout-info" style="margin-top:20px;">
+    <strong>نطاق التطبيق:</strong> تسري أحكام هذا الدليل على جميع الموظفين العاملين في مكتب ماز، سواء كانوا بعقود محددة المدة أو غير محددة، وبكافة تخصصاتهم المهنية والإدارية.
+  </div>
+  <div class="page-num">3</div>
+</div>
+
+<!-- CHAPTER 1 -->
+<div class="page" id="ch1">
+  <div class="chapter-header">
+    <div class="chapter-number">١</div>
+    <div class="chapter-title">التوظيف والتعيين</div>
+  </div>
+
+  <h2 class="section-title" id="ch1-1">١. سياسة التوظيف (Recruitment Policy)</h2>
+  <ul class="policy-list">
+    <li><strong>حق العمل:</strong> العمل حق للمواطن لا يجوز لغيره ممارسته إلا بعد توافر الشروط المنصوص عليها في النظام.</li>
+    <li><strong>المساواة:</strong> يتساوى المواطنون في حق العمل دون أي تمييز على أساس الجنس، الإعاقة، السن، أو أي شكل آخر من أشكال التمييز.</li>
+    <li><strong>دعم ذوي الإعاقة:</strong> تلتزم المنشأة التي تستخدم (25) عاملاً فأكثر بتشغيل ذوي إعاقة مؤهلين مهنياً بنسبة لا تقل عن (4%) من مجموع عمالها.</li>
+    <li><strong>اللغة المعتمدة:</strong> يجب أن تكون اللغة العربية هي المستخدمة في جميع بيانات وسجلات التوظيف وعقود العمل.</li>
+  </ul>
+
+  <h2 class="section-title" id="ch1-2">٢. شروط التعيين (Employment Conditions)</h2>
+  <ul class="policy-list numbered">
+    <li><strong>المؤهل العلمي:</strong> الحصول على درجة البكالوريوس كحد أدنى في التخصص المطلوب من جامعة معترف بها.</li>
+    <li><strong>الاعتماد المهني:</strong> الحصول على عضوية سارية من الهيئة السعودية للمهندسين (للوظائف الهندسية).</li>
+    <li><strong>الخبرة العملية:</strong> توفر خبرة سارية وسجل إنجازات يتوافق مع متطلبات الوصف الوظيفي.</li>
+    <li><strong>الأهلية والنزاهة:</strong> أن يكون المرشح حسن السيرة والسلوك، ولم يسبق الحكم عليه في جريمة مخلة بالشرف.</li>
+    <li><strong>الكفاءة التقنية:</strong> إتقان البرامج الهندسية والتقنية المرتبطة بطبيعة العمل.</li>
+    <li><strong>المعايير التنظيمية:</strong> اجتياز كافة المقابلات الشخصية والاختبارات الفنية.</li>
+  </ul>
+
+  <h2 class="section-title" id="ch1-3">٣. إجراءات التوظيف (Recruitment Procedures)</h2>
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      خطوات عملية التوظيف <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body open">
+      <ul class="policy-list numbered">
+        <li><strong>تحديد الاحتياج واعتماده:</strong> يرفع مدير القسم نموذج "طلب احتياج توظيف" — تراجعه الموارد البشرية — يُرفع للمدير العام للاعتماد.</li>
+        <li><strong>الاستقطاب والفرز الأولي:</strong> الإعلان عبر المنصات المهنية مع مراعاة أولوية التوظيف للسعوديين وفقاً للمادة 25 من نظام العمل.</li>
+        <li><strong>التقييم الفني والمهني:</strong> اختبارات تقنية لتقييم القدرات التصميمية أو الإشرافية أو البرمجية.</li>
+        <li><strong>المقابلات الشخصية:</strong> مقابلة أولى (الموارد البشرية) + مقابلة فنية (لجنة مختصة بمدير القسم).</li>
+        <li><strong>فحص المراجع (Background Check):</strong> التواصل مع مرجع أو اثنين من جهات العمل السابقة.</li>
+        <li><strong>عرض العمل (Job Offer):</strong> عرض رسمي مكتوب يتضمن المسمى الوظيفي، الراتب، البدلات، المزايا، وفترة التجربة.</li>
+        <li><strong>مسوّغات التعيين والتعاقد:</strong> توقيع عقد العمل وتوثيقه عبر <strong>منصة قوى</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="section-title" id="ch1-4">٤. عقود العمل (Employment Contracts)</h2>
+  <ul class="policy-list">
+    <li><strong>التوثيق:</strong> يُبرم العقد إلكترونياً عبر منصة قوى وفق النموذج الموحد.</li>
+    <li><strong>محتوى العقد:</strong> يتضمن الأجر، البدلات، تاريخ المباشرة، المسمى الوظيفي، ومكان العمل.</li>
+    <li><strong>الملاحق الإضافية:</strong> إقرارات السرية • حقوق الملكية الفكرية • شرط عدم المنافسة (المادة 83).</li>
+  </ul>
+
+  <h2 class="section-title" id="ch1-5">٥. فترة التجربة (Probation Period)</h2>
+  <div class="callout callout-info">
+    <strong>المدة:</strong> 90 يوماً من تاريخ المباشرة الفعلي — قابلة للتمديد حتى 180 يوماً باتفاق كتابي.
+  </div>
+  <ul class="policy-list">
+    <li>لا تدخل في حساب فترة التجربة: إجازات عيد الفطر، عيد الأضحى، اليوم الوطني، يوم التأسيس، والإجازات المرضية.</li>
+    <li>يحق لأي من الطرفين إنهاء العقد خلال هذه الفترة دون تعويض أو مكافأة نهاية خدمة.</li>
+    <li>لا يجوز وضع الموظف تحت التجربة أكثر من مرة إلا في حالات محددة نظاماً.</li>
+  </ul>
+
+  <div class="callout callout-warn" style="margin-top:16px;">
+    <strong>ملاحظة عابرة بين الفصول:</strong> للاطلاع على إجراءات إنهاء التعاقد بعد فترة التجربة، انظر
+    <a class="cross-link" onclick="document.getElementById('ch7').scrollIntoView({behavior:'smooth'})">الفصل السابع: انتهاء الخدمة</a>.
+  </div>
+  <div class="page-num">4 — 6</div>
+</div>
+
+<!-- CHAPTER 2 -->
+<div class="page" id="ch2">
+  <div class="chapter-header">
+    <div class="chapter-number">٢</div>
+    <div class="chapter-title">الدوام وساعات العمل</div>
+  </div>
+
+  <h2 class="section-title" id="ch2-1">١. أيام وساعات العمل (Working Days & Hours)</h2>
+  <table class="data-table">
+    <tr><th>البند</th><th>التفصيل</th></tr>
+    <tr><td>أيام العمل</td><td>الأحد — الخميس (5 أيام أسبوعياً)</td></tr>
+    <tr><td>ساعات الدوام</td><td>08:00 صباحاً حتى 05:00 مساءً (شاملة ساعة راحة)</td></tr>
+    <tr><td>فترة الراحة</td><td>ساعة واحدة يومياً — تُوثَّق عبر جهاز البصمة</td></tr>
+    <tr><td>الراحة البينية</td><td>11 ساعة متصلة على الأقل بين نهاية يوم عمل وبداية اليوم التالي</td></tr>
+  </table>
+
+  <h2 class="section-title" id="ch2-2">٢. الحضور والانصراف (Attendance & Punctuality)</h2>
+  <ul class="policy-list">
+    <li><strong>نافذة الحضور المرنة:</strong> من 08:00 إلى 09:00 صباحاً.</li>
+    <li><strong>الخروج المبكر:</strong> ممنوع إلا بإذن مسبق ومعتمد من المدير المباشر.</li>
+    <li><strong>الاستئذان الشخصي:</strong> 6 ساعات شهرياً مدفوعة الأجر — بتنسيق مسبق مع الإدارة.</li>
+    <li><strong>الاستثناءات:</strong> الموظفون ذوو الطبيعة الميدانية مستثنون من قيود التواجد بشرط تقارير دورية.</li>
+  </ul>
+
+  <h2 class="section-title" id="ch2-3">٣. التأخير والغياب (Tardiness & Absence)</h2>
+  <div class="callout callout-warn">
+    <strong>التأخير:</strong> يُسجَّل تأخير على الموظف في حال وصوله بعد 09:00 صباحاً. تُجمَّع دقائق التأخير شهرياً وتُخصَّم من الراتب.
+  </div>
+  <ul class="policy-list">
+    <li><strong>الغياب بعذر:</strong> إخطار المدير المباشر قبل ساعة من بداية الدوام + تقرير طبي عند العودة.</li>
+    <li><strong>الغياب بدون عذر:</strong> غياب غير مدفوع الأجر + إجراءات تأديبية نظامية.</li>
+  </ul>
+
+  <h2 class="section-title" id="ch2-4">٤. العمل الإضافي (Overtime)</h2>
+  <div class="callout callout-info">
+    كل عمل يُكلَّف به الموظف بعد ساعات العمل الرسمية، أو خلال أيام الأعياد والعطلات، يُعتبر عملاً إضافياً.
+  </div>
+  <table class="data-table" style="margin-top:12px;">
+    <tr><th>الحالة</th><th>الاحتساب</th></tr>
+    <tr><td>الأيام العادية</td><td>أجر الساعة الأساسي + 50%</td></tr>
+    <tr><td>العطلات الرسمية</td><td>أجر الساعة + 50% + أجر اليوم المستحق أصلاً، أو إجازة بديلة</td></tr>
+    <tr><td>الحد الأقصى يومياً</td><td>12 ساعة إجمالاً (أساسية + إضافية)</td></tr>
+  </table>
+
+  <div class="accordion" style="margin-top:14px;">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      الإجازة التعويضية بدلاً من المقابل النقدي <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <ul class="policy-list">
+        <li><strong>معيار التعويض:</strong> ساعة ونصف عن كل ساعة عمل إضافي.</li>
+        <li><strong>الحد الأقصى:</strong> 30 يوماً في السنة التقويمية.</li>
+        <li><strong>الموافقة المسبقة:</strong> اتفاق كتابي بين الموظف ومديره المباشر.</li>
+        <li><strong>التوثيق:</strong> عبر النماذج المعتمدة من إدارة الموارد البشرية.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="section-title">٥. نظام البصمة (Biometric System)</h2>
+  <div class="callout callout-danger">
+    <strong>يُمنع منعاً باتاً</strong> تسجيل الحضور نيابةً عن زميل آخر. من يخالف ذلك يُعرّض نفسه والطرف الآخر للمساءلة القانونية المشددة.
+  </div>
+  <div class="page-num">7 — 9</div>
+</div>
+
+<!-- CHAPTER 3 -->
+<div class="page" id="ch3">
+  <div class="chapter-header">
+    <div class="chapter-number">٣</div>
+    <div class="chapter-title">الأجور والمزايا</div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ١. الراتب الأساسي (Basic Salary) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body open">
+      <ul class="policy-list">
+        <li>يُحدَّد الراتب الأساسي في عقد العمل بناءً على المؤهل الهندسي والخبرة المهنية.</li>
+        <li>يُستخدَم كقاعدة لحساب أجر ساعة العمل الإضافية (الأساسي + 50%).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ٢. الراتب الإجمالي (Gross Salary) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <ul class="policy-list">
+        <li>يمثّل مجموع الراتب الأساسي مضافاً إليه كافة البدلات والمزايا النقدية الممنوحة للموظف.</li>
+        <li>لا يشمل المكافآت الاستثنائية أو تعويضات السفر والمهمات الميدانية.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ٣. البدلات (Allowances) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <table class="data-table">
+        <tr><th>نوع البدل</th><th>الوصف</th></tr>
+        <tr><td>بدل السكن</td><td>نسبة من الراتب الأساسي أو مبلغ مقطوع لتأمين وحدة سكنية ملائمة</td></tr>
+        <tr><td>بدل النقل</td><td>لتغطية تكاليف الانتقال من وإلى مقر المكتب أو مواقع المشاريع</td></tr>
+        <tr><td>بدلات أخرى</td><td>بدل طبيعة عمل للمهندسين الميدانيين، بدل اتصال حسب مقتضيات الوظيفة</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ٤. صرف الرواتب (Payroll Processing) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <ul class="policy-list">
+        <li>يُودَع الراتب في الحسابات البنكية في <strong>نهاية كل شهر ميلادي</strong>.</li>
+        <li>يجب تقديم سجلات العمل الإضافي المعتمدة قبل تاريخ <strong>25 من كل شهر</strong> لضمان إدراجها في مسير الرواتب.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ٥. الاستقطاعات (Deductions) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <ul class="policy-list">
+        <li><strong>التأمينات الاجتماعية:</strong> استقطاع الحصة المقررة نظاماً من راتب الموظف السعودي.</li>
+        <li><strong>دقائق التأخير:</strong> تُجمَّع شهرياً وتُخصَّم من الراتب.</li>
+        <li><strong>الغياب والجزاءات:</strong> يُخصَّم أجر أيام الغياب بدون عذر + الغرامات المنصوص عليها.</li>
+        <li><strong>الخروج بدون إذن:</strong> يُحسَم وفقاً لجدول الجزاءات المعتمد. انظر <a class="cross-link" onclick="document.getElementById('ch6').scrollIntoView({behavior:'smooth'})">الفصل السادس: الجزاءات</a>.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="page-num">10 — 12</div>
+</div>
+
+<!-- CHAPTER 4 -->
+<div class="page" id="ch4">
+  <div class="chapter-header">
+    <div class="chapter-number">٤</div>
+    <div class="chapter-title">الإجازات وتذاكر السفر</div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ١. الإجازة السنوية (Annual Leave) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body open">
+      <table class="data-table">
+        <tr><th>مدة الخدمة</th><th>رصيد الإجازة السنوية</th></tr>
+        <tr><td>أقل من 5 سنوات</td><td>21 يوماً</td></tr>
+        <tr><td>5 سنوات فأكثر</td><td>30 يوماً</td></tr>
+      </table>
+      <ul class="policy-list" style="margin-top:12px;">
+        <li>تقديم طلب الإجازة قبل 30 يوماً على الأقل.</li>
+        <li>يُصرَف أجر الإجازة (الأساسي + البدلات) قبل 10 أيام من تاريخ بدئها.</li>
+        <li>يُسمح بترحيل 25 يوماً كحد أقصى للسنة التالية.</li>
+        <li>إذا تجاوزت مدة الإجازة المتصلة 5 أيام عمل، تُحتسب أيام نهاية الأسبوع ضمن الرصيد.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ٢. الإجازة المرضية (Sick Leave) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <table class="data-table">
+        <tr><th>المدة</th><th>نسبة الأجر</th></tr>
+        <tr><td>أول 30 يوماً</td><td><span class="tag tag-green">أجر كامل 100%</span></td></tr>
+        <tr><td>التالية 60 يوماً</td><td><span class="tag tag-amber">75% من الأجر</span></td></tr>
+        <tr><td>التالية 30 يوماً</td><td><span class="tag tag-red">بدون أجر</span></td></tr>
+      </table>
+      <p style="margin-top:10px;">الحد الأقصى الإجمالي: <strong>120 يوماً</strong> في السنة الواحدة. يشترط تقرير طبي معتمد عبر تطبيق "صحتي".</p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ٣. الإجازات الرسمية (Public Holidays) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <table class="data-table">
+        <tr><th>المناسبة</th><th>المدة</th></tr>
+        <tr><td>عيد الفطر</td><td>4 أيام</td></tr>
+        <tr><td>عيد الأضحى</td><td>4 أيام</td></tr>
+        <tr><td>اليوم الوطني</td><td>يوم واحد</td></tr>
+        <tr><td>يوم التأسيس</td><td>يوم واحد</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ٤. الإجازات الاضطرارية والخاصة (Emergency & Special Leaves) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <table class="data-table">
+        <tr><th>نوع الإجازة</th><th>المدة</th><th>الأجر</th></tr>
+        <tr><td>وفاة الزوجة / الأصول / الفروع</td><td>5 أيام</td><td>مدفوعة</td></tr>
+        <tr><td>وفاة الأخ / الأخت</td><td>3 أيام</td><td>مدفوعة</td></tr>
+        <tr><td>عدة الموظفة المسلمة (وفاة الزوج)</td><td>4 أشهر و10 أيام</td><td>مدفوعة</td></tr>
+        <tr><td>إجازة وفاة الزوج (غير مسلمة)</td><td>15 يوماً</td><td>مدفوعة</td></tr>
+        <tr><td>الزواج</td><td>5 أيام (مرة واحدة)</td><td>مدفوعة</td></tr>
+        <tr><td>المولود (الأبوة)</td><td>3 أيام</td><td>مدفوعة</td></tr>
+        <tr><td>إجازة بدون أجر</td><td>بالاتفاق</td><td>غير مدفوعة</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ٥. إجازة التميز الإداري (Discretionary Excellence Leave) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <div class="callout callout-success">
+        منحة تشجيعية تمنحها الإدارة للموظفين ذوي الأداء الاستثنائي — حتى <strong>9 أيام عمل</strong> كمعيار عام.
+      </div>
+      <ul class="policy-list">
+        <li>لا تُعتبر حقاً مكتسباً أو استحقاقاً إلزامياً.</li>
+        <li>لا يستحقها الموظف إلا بعد استنفاد إجازته السنوية المستحقة.</li>
+        <li>لا يجوز ترحيلها للعام التالي أو المطالبة بتعويض مالي عند عدم استخدامها.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ٦. إجازات أخرى حسب نظام العمل <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <ul class="policy-list">
+        <li><strong>إجازة الوضع:</strong> 12 أسبوعاً بأجر كامل. يُحظر تشغيل الموظفة خلال الستة أسابيع التالية للوضع.</li>
+        <li><strong>إجازة الحج:</strong> 10–15 يوماً بأجر كامل — مرة واحدة — بشرط إتمام سنتين خدمة متصلة.</li>
+        <li><strong>إجازة الامتحانات:</strong> بأجر كامل عن سنة غير معادة بعدد أيام الامتحان الفعلية.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="section-title" style="margin-top:20px;">٧. سياسة تذاكر السفر (Travel Policy)</h2>
+  <table class="data-table">
+    <tr><th>الفئة</th><th>عدد التذاكر</th><th>المشمولون</th><th>الدرجة</th><th>قيمة التذكرة</th></tr>
+    <tr><td>المدير العام</td><td>4 سنوياً</td><td>الموظف + الزوجة + 2 أبناء</td><td>سياحية</td><td>2000 ر.س</td></tr>
+    <tr><td>مدراء الأقسام</td><td>2 سنوياً</td><td>الموظف + الزوجة + 2 أبناء</td><td>سياحية</td><td>2000 ر.س</td></tr>
+    <tr><td>المهندسون والمشرفون</td><td>واحدة سنوياً</td><td>الموظف فقط</td><td>سياحية</td><td>2000 ر.س</td></tr>
+    <tr><td>العمال والسواقون</td><td>واحدة كل سنتين</td><td>الموظف فقط</td><td>سياحية</td><td>2000 ر.س</td></tr>
+  </table>
+  <div class="callout callout-warn" style="margin-top:12px;">
+    لا يُصرَف بدل نقدي عن تذاكر السفر إذا اختار الموظف عدم السفر خلال إجازته السنوية. ولا يجوز ترحيل التذاكر لسنة لاحقة.
+  </div>
+  <div class="page-num">13 — 17</div>
+</div>
+
+<!-- CHAPTER 5 -->
+<div class="page" id="ch5">
+  <div class="chapter-header">
+    <div class="chapter-number">٥</div>
+    <div class="chapter-title">تقييم الأداء والتطوير</div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ١. نظام تقييم الأداء (Performance Appraisal System) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body open">
+      <h3 class="subsection">دورة التقييم</h3>
+      <ul class="policy-list">
+        <li><strong>تقييم ربع سنوي:</strong> مراجعة سريعة للأهداف (اختياري).</li>
+        <li><strong>تقييم سنوي:</strong> التقييم الشامل في نهاية السنة المالية — تُتخذ القرارات الإدارية بناءً عليه.</li>
+      </ul>
+      <h3 class="subsection">معايير التقييم الثلاثة</h3>
+      <ul class="policy-list">
+        <li><strong>الأهداف الوظيفية (KPIs):</strong> مدى إنجاز المهام المحددة في الوصف الوظيفي.</li>
+        <li><strong>الكفاءات السلوكية:</strong> الالتزام بالوقت، العمل الجماعي، المبادرة، التواصل الفعال.</li>
+        <li><strong>الجودة والدقة:</strong> خلو المخرجات من الأخطاء والالتزام بالمعايير المهنية.</li>
+      </ul>
+      <h3 class="subsection">سلّم درجات التقييم</h3>
+      <table class="data-table">
+        <tr><th>الدرجة</th><th>الوصف</th></tr>
+        <tr><td><span class="tag tag-green">A — ممتاز</span></td><td>يتجاوز التوقعات بشكل مستمر</td></tr>
+        <tr><td><span class="tag tag-blue">B — جيد جداً</span></td><td>يلبي جميع التوقعات وغالباً ما يتجاوزها</td></tr>
+        <tr><td><span class="tag tag-blue">C — جيد</span></td><td>يلبي التوقعات الأساسية بنجاح</td></tr>
+        <tr><td><span class="tag tag-amber">D — مرضي</span></td><td>يحتاج إلى تحسين — يُضع له خطة تطوير</td></tr>
+        <tr><td><span class="tag tag-red">F — غير مرضٍ</span></td><td>أداء ضعيف يتطلب إجراءً إدارياً فورياً</td></tr>
+      </table>
+      <div class="callout callout-info" style="margin-top:12px;">
+        <strong>إجراءات التظلم:</strong> يحق للموظف الاعتراض على نتيجة التقييم خلال <strong>5 أيام عمل</strong> من تاريخ استلامها.
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ٢. التدريب والتطوير (Training & Development) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <h3 class="subsection">أنواع التدريب</h3>
+      <ul class="policy-list">
+        <li>التدريب الداخلي داخل الشركة.</li>
+        <li>البرامج الإلكترونية أو التدريب عن بعد.</li>
+        <li>التدريب أثناء العمل (On-the-Job Training).</li>
+      </ul>
+      <h3 class="subsection">آلية الترشيح</h3>
+      <ul class="policy-list">
+        <li>يتم الترشيح من قبل المدير المباشر.</li>
+        <li>يعتمد قسم الموارد البشرية خطة التدريب بعد مراجعة الاحتياج.</li>
+        <li>يُشترط موافقة الإدارة العليا في حال الدورات مرتفعة التكلفة.</li>
+      </ul>
+      <div class="callout callout-warn">
+        لا يُعتبر الترشيح للتدريب حقاً مكتسباً لجميع الموظفين، بل يتم وفق احتياجات العمل وتقدير الإدارة.
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ٣. سياسة الترقية والزيادات (Promotion Policy) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <h3 class="subsection">الدرجات الوظيفية ومتطلبات الترقية</h3>
+      <table class="data-table">
+        <tr><th>الدرجة</th><th>المستوى</th><th>الحد الأدنى للبقاء</th><th>نوع الترقية</th></tr>
+        <tr><td>F</td><td>عامل</td><td>—</td><td>أفقية فقط</td></tr>
+        <tr><td>E</td><td>موظف مبتدئ / مساعد</td><td>سنتان</td><td>أفقية أو رأسية</td></tr>
+        <tr><td>D</td><td>أخصائي أول / مهندس</td><td>3 سنوات</td><td>أفقية أو رأسية</td></tr>
+        <tr><td>C</td><td>مشرف / مهندس أول</td><td>4 سنوات</td><td>أفقية أو رأسية</td></tr>
+        <tr><td>B</td><td>مدير قسم</td><td>حسب التقييم A</td><td>أفقية أو رأسية</td></tr>
+        <tr><td>A</td><td>مدير عام</td><td>—</td><td>أفقية أو تعيين قيادي</td></tr>
+      </table>
+      <div class="callout callout-info" style="margin-top:12px;">
+        <strong>عند الترقية:</strong> يُنقل الموظف إلى الحد الأدنى لراتب الدرجة الجديدة، أو يُمنح زيادة بنسبة <strong>15%</strong> على راتبه الحالي — أيهما أعلى.
+      </div>
+    </div>
+  </div>
+  <div class="page-num">18 — 24</div>
+</div>
+
+<!-- CHAPTER 6 -->
+<div class="page" id="ch6">
+  <div class="chapter-header">
+    <div class="chapter-number">٦</div>
+    <div class="chapter-title">المخالفات والجزاءات</div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ١. المخالفات الوظيفية (Workplace Violations) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body open">
+      <ul class="policy-list numbered">
+        <li><strong>مواعيد العمل:</strong> التأخر بدون عذر، الانصراف المبكر، الغياب.</li>
+        <li><strong>نظام العمل:</strong> عدم الالتزام بالتعليمات الإدارية، إهمال المهام، إضاعة وقت العمل.</li>
+        <li><strong>السلوك:</strong> المشاجرات، عدم التقيد بالزي الرسمي، سوء التعامل مع الزملاء والعملاء.</li>
+        <li><strong>الأمانة والسرية:</strong> إفشاء أسرار المشاريع، التزوير، سوء استخدام ممتلكات المنشأة.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ٢. إجراءات التحقيق (Investigation Procedures) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <ul class="policy-list numbered">
+        <li><strong>الإخطار الكتابي:</strong> إبلاغ الموظف كتابياً فور اكتشاف المخالفة — لا يتجاوز 15 يوماً من علم الإدارة.</li>
+        <li><strong>جلسة التحقيق:</strong> سماع أقوال الموظف وتحقيق دفاعه — يُدوَّن في محضر رسمي.</li>
+        <li><strong>لجنة التحقيق:</strong> للمخالفات الجسيمة — برئاسة مدير الموارد البشرية.</li>
+        <li><strong>السرية التامة:</strong> جميع أطراف التحقيق ملتزمون بالسرية.</li>
+      </ul>
+      <div class="callout callout-warn">
+        <strong>المدد النظامية:</strong> لا يجوز توقيع الجزاء بعد مضي 30 يوماً من كشف المخالفة. يصدر قرار الجزاء خلال 15 يوماً من إقفال محضر التحقيق.
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ٣. الجزاءات التأديبية (Disciplinary Actions) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <ul class="policy-list numbered">
+        <li>الإنذار الشفهي — للمخالفات البسيطة في المرة الأولى.</li>
+        <li>الإنذار الكتابي — يُوثَّق في ملف الموظف.</li>
+        <li>الحسم من الأجر — بما لا يتجاوز أجر خمسة أيام في الشهر الواحد.</li>
+        <li>الإيقاف عن العمل — بدون أجر لمدة لا تتجاوز خمسة أيام.</li>
+        <li>الحرمان من الترقية أو العلاوة — لمدة محددة.</li>
+        <li>الفصل من الخدمة — مع صرف المكافأة أو بدونها وفق المادة (80).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ٤. التظلم (Grievance & Appeals) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <ul class="policy-list">
+        <li>يحق للموظف تقديم تظلم كتابي خلال <strong>15 يوماً</strong> من تاريخ إبلاغه بالقرار التأديبي.</li>
+        <li>تلتزم الإدارة بالرد خلال <strong>10 أيام عمل</strong> من تقديم التظلم.</li>
+        <li>لا يُخل تقديم التظلم الإداري بحق الموظف في اللجوء إلى الجهات المختصة وفقاً لنظام العمل.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="page-num">25 — 27</div>
+</div>
+
+<!-- CHAPTER 7 -->
+<div class="page" id="ch7">
+  <div class="chapter-header">
+    <div class="chapter-number">٧</div>
+    <div class="chapter-title">انتهاء الخدمة</div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ١. الاستقالة (Resignation) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body open">
+      <ul class="policy-list">
+        <li><strong>عقود غير محددة:</strong> إخطار كتابي للإدارة قبل التوقف بـ <strong>30 يوماً</strong> على الأقل.</li>
+        <li><strong>عقود محددة المدة:</strong> ترك العمل قبل النهاية يُعدّ "فسخاً" ويخضع للتبعات القانونية.</li>
+        <li>تُعدّ الاستقالة مقبولة حكماً إذا مضى عليها 30 يوماً دون رد الإدارة.</li>
+        <li>يلتزم الموظف بالاستمرار بكامل كفاءته طوال فترة الإشعار.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ٢. إنهاء العقد (Contract Termination) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <ul class="policy-list">
+        <li>ينتهي العقد بانتهاء مدته في العقود المحددة، أو باتفاق الطرفين كتابةً.</li>
+        <li>يجوز الإنهاء في حال القوة القاهرة، أو إغلاق المنشأة نهائياً، أو إفلاسها.</li>
+        <li>في حال الإنهاء غير المشروع من طرف المنشأة، يستحق الموظف تعويضاً وفق نظام العمل.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ٣. الفصل من العمل (Dismissal from Work — المادة 80) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <div class="callout callout-danger">
+        يحق للمنشأة فسخ العقد دون مكافأة أو إشعار أو تعويض في الحالات التي نصّت عليها المادة (80) كالاعتداء على الرؤساء، التزوير، إفشاء الأسرار المهنية.
+      </div>
+      <p>لا يتم الفصل لسبب سلوكي إلا بعد استنفاد درجات الجزاءات الإدارية والتحقيق مع الموظف وتوثيق ذلك رسمياً. انظر <a class="cross-link" onclick="document.getElementById('ch6').scrollIntoView({behavior:'smooth'})">الفصل السادس: الجزاءات</a>.</p>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ٤. مكافأة نهاية الخدمة (End of Service Award) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <h3 class="subsection">احتساب المكافأة عند الفصل / إنهاء العقد</h3>
+      <table class="data-table">
+        <tr><th>مدة الخدمة</th><th>المكافأة</th></tr>
+        <tr><td>السنوات الخمس الأولى</td><td>أجر نصف شهر عن كل سنة</td></tr>
+        <tr><td>ما بعد الخمس سنوات</td><td>أجر شهر كامل عن كل سنة</td></tr>
+      </table>
+      <h3 class="subsection" style="margin-top:14px;">في حالة الاستقالة</h3>
+      <table class="data-table">
+        <tr><th>مدة الخدمة</th><th>المستحق</th></tr>
+        <tr><td>أقل من سنتين</td><td><span class="tag tag-red">لا يستحق مكافأة</span></td></tr>
+        <tr><td>من 2 إلى 5 سنوات</td><td>ثلث المكافأة</td></tr>
+        <tr><td>من 5 إلى 10 سنوات</td><td>ثلثا المكافأة</td></tr>
+        <tr><td>10 سنوات فأكثر</td><td><span class="tag tag-green">المكافأة كاملة</span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <button class="accordion-btn" onclick="toggleAccordion(this)">
+      ٥. تسليم العهدة (Handover of Assets) <span class="accordion-icon">▼</span>
+    </button>
+    <div class="accordion-body">
+      <ul class="policy-list">
+        <li>لا تكتمل إجراءات المخالصة المالية النهائية إلا بعد توقيع "نموذج جرد وتسليم العهدة" واعتماده.</li>
+        <li>يلتزم الموظف بتسليم كافة المخططات، الملفات الرقمية، الأجهزة، والوثائق الخاصة بالمشاريع.</li>
+        <li>يحق للمنشأة استقطاع قيمة أي عجز أو تلف متعمد من مستحقاته — بشرط ألا يتجاوز الحسم نصف أجر العامل شهرياً.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="page-num">28 — 31</div>
+</div>
+
+<!-- CHAPTER 8 -->
+<div class="page" id="ch8">
+  <div class="chapter-header">
+    <div class="chapter-number">٨</div>
+    <div class="chapter-title">أحكام ختامية</div>
+  </div>
+
+  <h2 class="section-title">١. الالتزام بالسياسات (Compliance with Policies)</h2>
+  <ul class="policy-list">
+    <li>يُعدّ توقيع الموظف على عقد العمل أو استلامه لنسخة من هذه اللائحة إقراراً بالعلم التام بمحتوياتها والالتزام بما ورد فيها.</li>
+    <li>يلتزم الموظف بكافة السياسات المرفقة بما في ذلك سياسات الحضور، العمل الإضافي، الإجازات، والترقيات.</li>
+    <li>أي مخالفة تمنح الإدارة الحق في اتخاذ الإجراءات التأديبية. انظر <a class="cross-link" onclick="document.getElementById('ch6').scrollIntoView({behavior:'smooth'})">الفصل السادس</a>.</li>
+  </ul>
+
+  <h2 class="section-title">٢. تعديل اللائحة (Amendment of Regulations)</h2>
+  <ul class="policy-list">
+    <li>للمكتب الحق الكامل في تعديل أو تحديث أو إلغاء أي من بنود هذه السياسات.</li>
+    <li>يتم إبلاغ الموظفين بأي تعديلات جوهرية عبر البريد الإلكتروني أو لوحة الإعلانات الرسمية.</li>
+    <li>تسري التعديالات الجديدة على جميع الموظفين من تاريخ اعتمادها، ولا تُطبَّق بأثر رجعي.</li>
+  </ul>
+
+  <h2 class="section-title">٣. تاريخ سريان اللائحة (Effective Date)</h2>
+  <div class="callout callout-success">
+    <strong>تاريخ السريان:</strong> تعتبر هذه اللائحة سارية المفعول ومعتمدة فور صدور قرار الإدارة العليا بالموافقة عليها بتاريخ <strong>05/03/2026م</strong>.
+    <br>تُراجَع هذه السياسات بصفة دورية (سنوياً) للتأكد من مواكبتها للتطورات الإدارية والفنية في قطاع الاستشارات الهندسية.
+  </div>
+  <div class="page-num">32 — 33</div>
+</div>
+
+</div><!-- /main-content -->
+</div><!-- /layout -->
+
+<!-- ACKNOWLEDGMENT BOX -->
+<div id="ack-box">
+  <h3>✍️ إقرار الاستلام والالتزام</h3>
+  <p>أُقرّ بأنني اطلعت على دليل سياسات وإجراءات الموارد البشرية لمكتب ماز الهندسية وفهمت محتوياته وأتعهد بالالتزام بجميع ما ورد فيه.</p>
+  <label id="ack-check">
+    <input type="checkbox" id="ack-cb" onchange="checkAck()">
+    <span>نعم، لقد قرأت الدليل كاملاً وأوافق على الالتزام بسياساته وإجراءاته.</span>
+  </label>
+  <br>
+  <button id="ack-sign" onclick="signAck()">تأكيد الإقرار</button>
+  <div id="ack-date"></div>
+</div>
+
+<!-- SCROLL TO TOP -->
+<div id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<script>
+// ── ACCORDION ──
+function toggleAccordion(btn) {
+  const body = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+
+// ── SIDEBAR ──
+let sidebarVisible = true;
+function toggleSidebar() {
+  sidebarVisible = !sidebarVisible;
+  const sb = document.getElementById('toc-sidebar');
+  const mc = document.getElementById('main-content');
+  sb.classList.toggle('hidden', !sidebarVisible);
+  mc.classList.toggle('full', !sidebarVisible);
+}
+
+// ── SEARCH ──
+let searchOpen = false;
+let matches = [], matchIdx = 0;
+const originalContent = {};
+
+function toggleSearch() {
+  searchOpen = !searchOpen;
+  const bar = document.getElementById('search-bar');
+  bar.classList.toggle('open', searchOpen);
+  if (searchOpen) document.getElementById('search-input').focus();
+  else clearSearch();
+}
+
+function doSearch(q) {
+  clearHighlights();
+  matches = [];
+  matchIdx = 0;
+  if (!q.trim()) { document.getElementById('search-count').textContent = ''; return; }
+
+  const walker = document.createTreeWalker(
+    document.getElementById('main-content'),
+    NodeFilter.SHOW_TEXT,
+    { acceptNode: n => n.parentElement.closest('script,style,#topbar,#search-bar,#toc-sidebar') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT }
+  );
+
+  const textNodes = [];
+  while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+  const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'gi');
+
+  textNodes.forEach(node => {
+    if (!re.test(node.nodeValue)) return;
+    re.lastIndex = 0;
+    const frag = document.createDocumentFragment();
+    let last = 0, m;
+    while ((m = re.exec(node.nodeValue)) !== null) {
+      frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+      const mark = document.createElement('mark');
+      mark.className = 'highlight';
+      mark.textContent = m[0];
+      matches.push(mark);
+      frag.appendChild(mark);
+      last = re.lastIndex;
+    }
+    frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+    node.parentNode.replaceChild(frag, node);
+  });
+
+  const cnt = document.getElementById('search-count');
+  cnt.textContent = matches.length ? `${matches.length} نتيجة` : 'لا توجد نتائج';
+  if (matches.length) scrollToMatch(0);
+}
+
+function scrollToMatch(idx) {
+  matches.forEach((m,i) => m.classList.toggle('active', i===idx));
+  if (matches[idx]) matches[idx].scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function nextMatch() { if (!matches.length) return; matchIdx = (matchIdx+1) % matches.length; scrollToMatch(matchIdx); document.getElementById('search-count').textContent = `${matchIdx+1} / ${matches.length}`; }
+function prevMatch() { if (!matches.length) return; matchIdx = (matchIdx-1+matches.length) % matches.length; scrollToMatch(matchIdx); document.getElementById('search-count').textContent = `${matchIdx+1} / ${matches.length}`; }
+
+function clearHighlights() {
+  document.querySelectorAll('mark.highlight').forEach(m => {
+    const parent = m.parentNode;
+    parent.replaceChild(document.createTextNode(m.textContent), m);
+    parent.normalize();
+  });
+  matches = []; matchIdx = 0;
+}
+
+function clearSearch() {
+  clearHighlights();
+  document.getElementById('search-input').value = '';
+  document.getElementById('search-count').textContent = '';
+}
+
+// ── ACTIVE TOC ──
+const sections = ['cover','toc','intro','ch1','ch1-1','ch1-2','ch1-3','ch1-4','ch1-5','ch2','ch2-1','ch2-2','ch2-3','ch2-4','ch3','ch4','ch5','ch6','ch7','ch8'];
+const tocLinks = document.querySelectorAll('#toc-sidebar a');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      tocLinks.forEach(l => l.classList.remove('active'));
+      const id = e.target.id;
+      const match = Array.from(tocLinks).find(l => l.getAttribute('href') === '#' + id);
+      if (match) match.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+
+sections.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) observer.observe(el);
+});
+
+// ── SCROLL TO TOP ──
+const scrollBtn = document.getElementById('scroll-top');
+window.addEventListener('scroll', () => scrollBtn.classList.toggle('show', window.scrollY > 400));
+
+// ── ACKNOWLEDGMENT ──
+function checkAck() {
+  const cb = document.getElementById('ack-cb');
+  const btn = document.getElementById('ack-sign');
+  btn.classList.toggle('ready', cb.checked);
+}
+function signAck() {
+  const btn = document.getElementById('ack-sign');
+  btn.textContent = '✓ تم التوقيع والإقرار';
+  btn.classList.add('done');
+  btn.disabled = true;
+  document.getElementById('ack-date').textContent = 'تم الإقرار بتاريخ: ' + new Date().toLocaleDateString('ar-SA');
+}
+
+// ── SEARCH KEYBOARD ──
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'f') { e.preventDefault(); toggleSearch(); }
+  if (e.key === 'Escape' && searchOpen) { searchOpen = false; document.getElementById('search-bar').classList.remove('open'); clearSearch(); }
+  if (e.key === 'Enter' && searchOpen) nextMatch();
+});
+</script>
+</body>
+</html>
